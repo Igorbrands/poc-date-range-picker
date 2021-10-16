@@ -1,0 +1,11 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  outline: 0;
+}
