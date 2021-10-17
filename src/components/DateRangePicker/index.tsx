@@ -1,18 +1,18 @@
-import { addDays } from "date-fns";
-import { useState } from "react";
+import { addDays } from 'date-fns';
+import { useState } from 'react';
 import {
   DateRange,
   DateRangeProps,
   OnDateRangeChangeProps,
   Range,
-} from "react-date-range";
+} from 'react-date-range';
 
 export default function DateRangePicker({ ...props }: DateRangeProps) {
   const [dates, setDates] = useState<Range[]>([
     {
       startDate: new Date(),
       endDate: new Date(),
-      key: "selectedDates",
+      key: 'selectedDates',
     },
   ]);
 
@@ -33,7 +33,7 @@ export default function DateRangePicker({ ...props }: DateRangeProps) {
         moveRangeOnFirstSelection={false}
         ranges={dates}
         dragSelectionEnabled={false}
-        minDate={addDays(new Date(), -1)}
+        minDate={addDays(new Date(), 0)}
         direction="vertical"
         scroll={{ enabled: true }}
         calendars={2}
