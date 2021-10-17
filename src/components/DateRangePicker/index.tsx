@@ -1,29 +1,44 @@
-import { useState } from 'react';
-import { DateRange } from 'react-date-range';
+import { addDays } from "date-fns";
+import { useState } from "react";
+import {
+  DateRange,
+  DateRangeProps,
+  OnDateRangeChangeProps,
+  Range,
+} from "react-date-range";
 
-export type RangeDateState = {
-  startDate: Date | null;
-  endDate: Date | null;
-  key?: string;
-};
-
-export default function DateRangePicker() {
-  const [state, setState] = useState([
+export default function DateRangePicker({ ...props }: DateRangeProps) {
+  const [dates, setDates] = useState<Range[]>([
     {
       startDate: new Date(),
-      endDate: null,
-      key: 'selection',
+      endDate: new Date(),
+      key: "selectedDates",
     },
   ]);
 
+  function onChangeRanges(values: any) {
+    setDates([values.selectedDates]);
+  }
+
   return (
     <>
-      <h2>Date Range</h2>
+      <h2>Date Range Picker</h2>
       <DateRange
-        editableDateInputs={true}
-        onChange={(item) => setState([])}
+        editableDateInputs={false}
+        showMonthAndYearPickers={false}
+        showPreview
+        showDateDisplay={false}
+        showSelectionPreview={false}
+        onChange={(values: OnDateRangeChangeProps) => onChangeRanges(values)}
         moveRangeOnFirstSelection={false}
-        ranges={state}
+        ranges={dates}
+        dragSelectionEnabled={false}
+        minDate={addDays(new Date(), -1)}
+        direction="vertical"
+        scroll={{ enabled: true }}
+        calendars={2}
+        months={2}
+        {...props}
       />
     </>
   );

@@ -1,34 +1,38 @@
-import { useState } from 'react';
-import DateRangePicker from '../DateRangePicker';
-import { addDays } from 'date-fns';
+import { useState } from "react";
+import {
+  DateRange,
+  DateRangeProps,
+  OnDateRangeChangeProps,
+  Range,
+} from "react-date-range";
 
-export type RangeDateState = {
-  startDate: Date | null;
-  endDate: Date | null;
-  key?: string;
-};
-
-export default function DateRangeHorizontal() {
-  const [state, setState] = useState([
+export default function DateRangeHorizontal({ ...props }: DateRangeProps) {
+  const [dates, setDates] = useState<Range[]>([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 7),
-      key: 'selection',
+      endDate: new Date(),
+      key: "selectedDates",
     },
   ]);
 
+  function onChangeRanges(values: any) {
+    setDates([values.selectedDates]);
+  }
+
   return (
     <>
-      <h2>Date Range</h2>
-      <DateRangePicker
-        onChange={(item) => setState([item.selection])}
-        showSelectionPreview={true}
-        moveRangeOnFirstSelection={false}
-        months={2}
-        ranges={state}
+      <h2>Date Range Horizontal</h2>
+
+      <DateRange
         direction="horizontal"
+        months={2}
+        showSelectionPreview={true}
+        editableDateInputs={true}
+        onChange={(value: OnDateRangeChangeProps) => onChangeRanges(value)}
+        moveRangeOnFirstSelection={false}
+        ranges={dates}
+        {...props}
       />
-      ;
     </>
   );
 }

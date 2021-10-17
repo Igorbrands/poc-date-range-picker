@@ -1,7 +1,7 @@
-import DatePicker from '../components/DatePicker';
-import DateRangePicker from '../components/DateRangePicker';
-import DateRangeHorizontal from '../components/DateRangeHorizontal';
-import { Route, Switch } from 'react-router';
+import DatePicker from "../components/DatePicker";
+import DateRangePicker from "../components/DateRangePicker";
+import DateRangeHorizontal from "../components/DateRangeHorizontal";
+import { Route, Switch } from "react-router";
 
 export default function Routes() {
   return (
